@@ -127,9 +127,95 @@
 
 
 
+// import React, { useEffect, useState } from "react";
+// import { useParams } from "react-router-dom";
+// import { useThemeContext } from "../hooks/ThemeContext.jsx"; // Import theme context
+
+// const ShopPage = () => {
+//   const { id } = useParams(); // get product id from URL
+//   const [product, setProduct] = useState(null);
+//   const { theme } = useThemeContext(); // Get theme from context
+
+//   useEffect(() => {
+//     fetch(`https://dummyjson.com/products/${id}`)
+//       .then((res) => res.json())
+//       .then((data) => setProduct(data));
+//   }, [id]);
+
+//   if (!product) return <p>Loading product...</p>;
+
+//   return (
+//     <div className={`p-4 min-h-screen transition-colors duration-300 ${
+//       theme === "dark" 
+//         ? "bg-gray-900 text-white" 
+//         : "bg-gray-100 text-black"
+//     }`}>
+//       <div className={`flex flex-col md:flex-row shadow-lg rounded-lg p-6 w-full max-w-6xl mx-auto transition-colors duration-300 ${
+//         theme === "dark" 
+//           ? "bg-gray-800 text-white" 
+//           : "bg-white text-black"
+//       }`}>
+//         {/* Product Image */}
+//         <img
+//           src={product.thumbnail}
+//           alt={product.title}
+//           className="w-full md:w-1/3 h-auto rounded-md object-contain mb-6 md:mb-0 md:mr-6"
+//         />
+
+//         {/* Product Info */}
+//         <div className="flex flex-col justify-between w-full md:w-2/3">
+//           <div>
+//             <h2 className={`text-2xl font-bold transition-colors duration-300 ${
+//               theme === "dark" ? "text-white" : "text-gray-800"
+//             }`}>
+//               {product.title}
+//             </h2>
+//             <p className="text-yellow-500 mt-2">Rating: {product.rating} ★</p>
+//             <p className={`mt-4 transition-colors duration-300 ${
+//               theme === "dark" ? "text-gray-300" : "text-gray-600"
+//             }`}>
+//               {product.description}
+//             </p>
+
+//             <div className="mt-4 flex items-center space-x-3">
+//               <span className="text-3xl font-bold text-red-600">
+//                 ${product.price}
+//               </span>
+//               <span className={`line-through transition-colors duration-300 ${
+//                 theme === "dark" ? "text-gray-400" : "text-gray-500"
+//               }`}>
+//                 {(
+//                   product.price +
+//                   product.price * (product.discountPercentage / 100)
+//                 ).toFixed(2)}
+//               </span>
+//             </div>
+
+//             <p className="mt-2 text-sm font-semibold text-red-500">
+//               Stock: {product.stock}
+//             </p>
+//           </div>
+
+//           <button className={`mt-6 px-6 py-3 rounded-lg hover:bg-green-700 transition-colors duration-300 ${
+//             theme === "dark" 
+//               ? "bg-green-700 text-white hover:bg-green-600" 
+//               : "bg-green-600 text-white hover:bg-green-700"
+//           }`}>
+//             Add to Cart
+//           </button>
+//         </div>
+//       </div>
+      
+//     </div>
+//   );
+// };
+
+// export default ShopPage;
+
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useThemeContext } from "../hooks/ThemeContext.jsx"; // Import theme context
+import { useThemeContext } from "../hooks/ThemeContext.jsx";
 
 const ShopPage = () => {
   const { id } = useParams(); // get product id from URL
@@ -137,6 +223,9 @@ const ShopPage = () => {
   const { theme } = useThemeContext(); // Get theme from context
 
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+    
     fetch(`https://dummyjson.com/products/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data));
