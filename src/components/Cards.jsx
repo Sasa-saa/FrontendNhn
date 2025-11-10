@@ -355,7 +355,7 @@ const Cards = () => {
           ) : (
             <button
               onClick={() => setShowMore(false)}
-              className="bg-white border border-black hover:bg-black hover:text-white py-2 px-6 rounded font-medium transition-colors duration-200"
+              className="bg-white/20 border border-black hover:bg-black hover:text-white py-2 px-6 rounded font-medium transition-colors duration-200"
             >
               Show Less
             </button>
