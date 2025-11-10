@@ -24,3 +24,22 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
+
+// components/Layout.jsx
+// import { useThemeContext } from "../hooks/ThemeContext.jsx";
+// import Navbar from "./Navbar";
+// import Footer from "./Footer";
+
+// export default function Layout({ children }) {
+//   const { theme } = useThemeContext();
+
+//   return (
+//     <div className={`min-h-screen transition-colors duration-300 ${
+//       theme === "dark" ? "bg-black text-white" : "bg-white text-black"
+//     }`}>
+//       <Navbar />
+//       <main>{children}</main>
+//       <Footer />
+//     </div>
+//   );
+// }
