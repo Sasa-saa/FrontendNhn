@@ -1,10 +1,20 @@
 // useFetch.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const useFetch = (url, options = {}) => {
   const [data, setData] = useState(null);       // store fetched data
   const [loading, setLoading] = useState(true); // track loading state
   const [error, setError] = useState(null);     // track errors
+
+  // create a stable serialized representation of options for dependencies
+  const serializedOptions = useMemo(() => {
+    try {
+      return JSON.stringify(options);
+    } catch {
+      // fallback to an empty object string if options cannot be stringified
+      return "{}";
+    }
+  }, [options]);
 
   useEffect(() => {
     if (!url) return;
@@ -17,7 +27,9 @@ const useFetch = (url, options = {}) => {
       setError(null);
 
       try {
-        const response = await fetch(url, { ...options, signal });
+        // parse options from the stable serialized string (safe because we handled stringify errors)
+        const opts = serializedOptions === "{}" ? {} : JSON.parse(serializedOptions);
+        const response = await fetch(url, { ...opts, signal });
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
@@ -36,7 +48,7 @@ const useFetch = (url, options = {}) => {
 
     // cleanup: abort fetch if component unmounts
     return () => controller.abort();
-  }, [url, JSON.stringify(options)]);
+  }, [url, serializedOptions]);
 
   return { data, loading, error };
 };
