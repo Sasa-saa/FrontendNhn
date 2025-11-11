@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useThemeContext } from "./hooks/ThemeContext.jsx"; // Only import the hook now
+import { useThemeContext } from "./hooks/ThemeContext.jsx"; 
 import Home from "./pages/Home";
 import DailyDeals from "./pages/DailyDeals.jsx";
 import Products from "./pages/Products.jsx";
